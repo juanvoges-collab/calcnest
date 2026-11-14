@@ -9,32 +9,32 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>CalcNest — Frame Quotation Calculator</title>
 <style>
-:root{--blue:#079fe3;--navy:#10223a;--muted:#64758a;--line:#d7e2ec;--pale:#e4f4fb;--bg:#f3f8fc}
+:root{--green:#234638;--navy:#234638;--muted:#69776d;--line:#d8cdb8;--pale:#eee7da;--bg:#f6f2e9;--sand:#c7b797;--crimson:#b51235}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--navy)}
-header{background:linear-gradient(120deg,#0b243c,#173d59);color:#fff;padding:22px max(18px,calc((100% - 920px)/2));text-align:center}
-.brand{font-size:28px;font-weight:800;letter-spacing:-.7px;display:flex;align-items:center;justify-content:center;min-height:44px}.brand span{color:#39bafa}.brand img{display:block;max-width:min(260px,80vw);max-height:76px;object-fit:contain;margin:0 auto}.sub{opacity:.86;margin-top:3px;font-size:14px}
-.logo-tools{margin-top:10px}.logo-tools label{display:inline-block;color:#dceefa;font-size:12px;font-weight:600;margin:0 8px 0 0}.logo-tools input{width:auto;min-height:0;max-width:190px;padding:5px;background:#ffffff18;color:#fff;border:1px solid #ffffff55;font-size:12px}.logo-tools button{padding:7px 10px;font-size:12px;background:#ffffff20;border:1px solid #ffffff55}
+header{background:linear-gradient(120deg,#1d3b30,#234638);color:#fff;padding:22px max(18px,calc((100% - 920px)/2));text-align:center}
+.brand{font-size:28px;font-weight:800;letter-spacing:-.7px;display:flex;align-items:center;justify-content:center;min-height:44px}.brand span{color:#fff}.brand img{display:block;max-width:min(260px,80vw);max-height:76px;object-fit:contain;margin:0 auto}.sub{opacity:.86;margin-top:3px;font-size:14px}
+.logo-tools{margin-top:10px}.logo-tools label{display:inline-block;color:#f6f2e9;font-size:12px;font-weight:600;margin:0 8px 0 0}.logo-tools input{width:auto;min-height:0;max-width:190px;padding:5px;background:#ffffff18;color:#fff;border:1px solid #ffffff55;font-size:12px}.logo-tools button{padding:7px 10px;font-size:12px;background:#ffffff20;border:1px solid #ffffff55}
 main{max-width:920px;margin:22px auto;padding:0 14px 48px}
 .card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:20px;margin-bottom:16px;box-shadow:0 5px 18px #193c5910}
 h2{font-size:19px;margin:0 0 4px}p.hint{margin:0 0 16px;color:var(--muted);font-size:13px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 label{display:block;font-weight:650;font-size:14px;margin-bottom:6px}
 input,select{width:100%;min-height:49px;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff;color:var(--navy);font:inherit;outline:none}
-input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #079fe322}
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px #23463822}
 .field{min-width:0}.wide{grid-column:1/-1}
-.selected{background:#e7eef3;color:#233b50;font-weight:650}
+.selected{background:#eee7da;color:#234638;font-weight:650}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
-button{border:0;border-radius:12px;padding:13px 18px;background:var(--blue);color:#fff;font:700 15px system-ui;cursor:pointer}
-button.secondary{background:#e8f2f8;color:#17415e}button.danger{background:#fff0f0;color:#a22}
+button{border:0;border-radius:12px;padding:13px 18px;background:var(--green);color:#fff;font:700 15px system-ui;cursor:pointer}
+button.secondary{background:#eee7da;color:#234638}button.danger{background:#fff0f0;color:#a22}
 button:disabled{opacity:.45;cursor:not-allowed}
-.preview{background:#e3f3fa;border-radius:14px;padding:14px 16px;margin-top:16px}
+.preview{background:#eee7da;border-radius:14px;padding:14px 16px;margin-top:16px}
 .preview .big{font-size:27px;font-weight:800;margin-top:3px}
 .muted{color:var(--muted);font-size:13px}
 .item{border-top:1px solid var(--line);padding:14px 0}.item:first-child{border-top:0}
 .itemhead{display:flex;justify-content:space-between;gap:12px;align-items:start}
 .itemtitle{font-weight:750}.itemtotal{font-weight:800;white-space:nowrap}
 .breakdown{display:grid;grid-template-columns:1fr auto;gap:4px 16px;font-size:13px;margin-top:9px;color:#43576c}
-.totalbox{background:#e3f3fa;border-radius:14px;padding:16px;margin-top:14px}
+.totalbox{background:#eee7da;border-radius:14px;padding:16px;margin-top:14px}
 .totalbox strong{font-size:29px}
 .savedrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
 .smallbtn{padding:8px 11px;font-size:13px}
@@ -43,7 +43,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:8px}
 @media print{body{background:#fff}header{background:#fff;color:#111;padding:0 0 14px;border-bottom:2px solid #222}main{max-width:none;margin:0;padding:12px 0}.card.formcard,.no-print,footer{display:none!important}.card{box-shadow:none;border:0;padding:0}.totalbox,.preview{background:#fff;border:1px solid #aaa}.item{break-inside:avoid}button{display:none}}
 </style></head>
 <body>
-<header><div class="brand" id="brand"><span style="color:#39bafa">Calc</span>Nest</div><div class="sub">Frame quotation calculator</div><div class="logo-tools no-print"><label for="logoFile">Choose your logo (PNG/JPG)</label><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp"><button id="removeLogo" type="button">Use CalcNest text</button></div></header>
+<header><div class="brand" id="brand"><span style="color:#fff">Calc</span>Nest</div><div class="sub">Frame quotation calculator</div><div class="logo-tools no-print"><label for="logoFile">Choose your logo (PNG/JPG)</label><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp"><button id="removeLogo" type="button">Use CalcNest text</button></div></header>
 <main>
 <section class="card formcard">
 <h2>Frame item details</h2><p class="hint">Enter measurements in metres. Add each frame to the estimate.</p>
@@ -143,11 +143,28 @@ $("new").addEventListener("click",()=>{if(items.length&&!confirm("Start a new es
 fillProfiles();calculatePreview();renderItems();savedList();
 function setLogo(data){
  const brand=$("brand");
- if(data){brand.innerHTML=`<img alt="Your business logo" src="${data}">`;localStorage.setItem("calcnest_logo",data);}
- else {brand.innerHTML='<span style="color:#39bafa">Calc</span>Nest';localStorage.removeItem("calcnest_logo");}
+ if(data){brand.innerHTML=`<img alt="Your crimson business logo" src="${data}">`;localStorage.setItem("calcnest_logo",data);}
+ else {brand.innerHTML='<span style="color:#fff">Calc</span>Nest';localStorage.removeItem("calcnest_logo");}
+}
+// Turn a black logo on white paper into crimson artwork with a transparent background.
+function makeCrimsonTransparent(source, callback){
+ const img=new Image();
+ img.onload=()=>{
+   const max=1400, scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+   const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+   const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(img,0,0,canvas.width,canvas.height);
+   const frame=ctx.getImageData(0,0,canvas.width,canvas.height),d=frame.data;
+   for(let i=0;i<d.length;i+=4){
+     const lum=0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2];
+     const alpha=Math.max(0,Math.min(255,Math.round((255-lum)*1.12)));
+     d[i]=181;d[i+1]=18;d[i+2]=53;d[i+3]=alpha;
+   }
+   ctx.putImageData(frame,0,0);callback(canvas.toDataURL("image/png"));
+ };
+ img.onerror=()=>alert("I couldn't read that image. Please choose the PNG or JPG logo again.");img.src=source;
 }
 const storedLogo=localStorage.getItem("calcnest_logo");if(storedLogo)setLogo(storedLogo);
-$("logoFile").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>3*1024*1024){alert("Please choose a logo smaller than 3 MB.");e.target.value="";return;}const reader=new FileReader();reader.onload=()=>setLogo(reader.result);reader.readAsDataURL(f);});
+$("logoFile").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>3*1024*1024){alert("Please choose a logo smaller than 3 MB.");e.target.value="";return;}const reader=new FileReader();reader.onload=()=>makeCrimsonTransparent(reader.result,setLogo);reader.readAsDataURL(f);});
 $("removeLogo").addEventListener("click",()=>{setLogo(null);$("logoFile").value="";});
 if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script></body></html>
