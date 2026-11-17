@@ -1,11 +1,67 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#FFFFFF">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="9d81e80c-6734-4fe6-b545-868d6529e4bd.jpeg">
-<link rel="icon" href="9d81e80c-6734-4fe6-b545-868d6529e4bd.jpeg">
-<title>RooiWolf — Frame Quotation Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="9d81e80c-6734-4fe6-b545-868d6529e4bd.jpeg">
+  <link rel="icon" href="9d81e80c-6734-4fe6-b545-868d6529e4bd.jpeg" type="image/jpeg">
+  <title>RooiWolf — Frame Quotation Calculator</title>
+  <style>
+    :root{--green:#234638;--muted:#69776d;--line:#d8cdb8;--pale:#eee7da;--bg:#f6f2e9;--red:#a22}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:#234638}
+    header{background:linear-gradient(120deg,#1d3b30,#234638);color:#fff;padding:18px 14px;text-align:center}.brand{display:flex;align-items:center;justify-content:center;gap:12px;font-size:28px;font-weight:800}.brand img{width:54px;height:54px;object-fit:cover;border-radius:12px}.sub{color:#e5ddd3;font-size:14px;margin-top:5px}
+    main{max-width:920px;margin:20px auto;padding:0 14px 40px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 5px 18px #193c5910}h2{font-size:19px;margin:0 0 4px}.hint,.muted{color:var(--muted);font-size:13px}.hint{margin:0 0 16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{min-width:0}.wide{grid-column:1/-1}label{display:block;font-weight:650;font-size:14px;margin-bottom:6px}input,select{width:100%;min-height:46px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:#fff;color:#234638;font:inherit}input:focus,select:focus{outline:2px solid #23463855}button{border:0;border-radius:11px;padding:12px 16px;background:var(--green);color:white;font:700 14px system-ui;cursor:pointer}button.secondary{background:var(--pale);color:var(--green)}button.danger{background:#fff0f0;color:var(--red)}button:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.preview,.totalbox{background:var(--pale);border-radius:12px;padding:14px;margin-top:14px}.big{font-size:26px;font-weight:800}.item{border-top:1px solid var(--line);padding:13px 0}.item:first-child{border-top:0}.itemhead{display:flex;justify-content:space-between;gap:10px}.itemtitle{font-weight:750}.savedrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.totalbox strong{font-size:28px}footer{text-align:center;color:var(--muted);font-size:12px;padding:8px}
+    @media(max-width:620px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.card{padding:16px}.actions button{flex:1}.savedrow{align-items:flex-start}}
+    @media print{body{background:#fff}header{background:#fff;color:#111;border-bottom:2px solid #222}main{margin:0;padding:10px}.formcard,.no-print,footer{display:none!important}.card{box-shadow:none}}
+  </style>
+</head>
+<body>
+  <header><div class="brand"><img src="9d81e80c-6734-4fe6-b545-868d6529e4bd.jpeg" alt="RooiWolf logo"><span>RooiWolf</span></div><div class="sub">Frame quotation calculator</div></header>
+  <main>
+    <section class="card formcard">
+      <h2>Frame item details</h2><p class="hint">Enter measurements in metres. Add each frame to the estimate.</p>
+      <div class="grid">
+        <div class="field"><label for="qty">Quantity *</label><input id="qty" type="number" min="1" step="1" value="1"></div>
+        <div class="field"><label for="kind">Frame type *</label><select id="kind"><option value="standard">Standard frame</option><option value="floater">Floater frame</option></select></div>
+        <div class="field wide"><label for="profile">Moulding profile *</label><select id="profile"><option value="">Choose a profile</option></select></div>
+        <div class="field" id="customCodeWrap" hidden><label for="customCode">Custom profile code</label><input id="customCode" placeholder="Profile code"></div>
+        <div class="field" id="customPriceWrap" hidden><label for="customPrice">Profile price per metre (R) *</label><input id="customPrice" type="number" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label for="length">Length (m) *</label><input id="length" type="number" min="0.001" step="0.001" placeholder="0.000"></div>
+        <div class="field"><label for="width">Width (m) *</label><input id="width" type="number" min="0.001" step="0.001" placeholder="0.000"></div>
+        <div class="field standardonly"><label for="mount">Mounting style *</label><select id="mount"><option value="">Choose a mounting style</option><option value="150">Edge-to-Edge</option><option value="323">Raised-and-Floated</option></select></div>
+        <div class="field"><label for="size">Labour size bracket *</label><select id="size"><option value="">Choose a size bracket</option><option value="1">A4–A3</option><option value="1.5">A2</option><option value="2">A1</option><option value="2.5">A0</option><option value="3">1.5A0</option><option value="4">2A0</option></select></div>
+      </div>
+      <div class="preview"><div class="muted">Live estimate preview</div><div class="big" id="previewtotal">R0.00</div><div class="muted" id="previewnote">Complete the required fields to calculate.</div></div>
+      <div class="actions"><button id="add" disabled>Add frame item</button><button class="secondary" id="clear">Clear fields</button></div>
+    </section>
+    <section class="card"><h2>Estimate details</h2><p class="hint">Optional customer details appear on the printed quotation.</p><div class="grid"><div><label for="customer">Customer name</label><input id="customer" placeholder="Customer name"></div><div><label for="contact">Contact number</label><input id="contact" placeholder="Phone number"></div></div></section>
+    <section class="card"><h2>Estimate breakdown</h2><div class="muted" id="count">No frame items added yet.</div><div id="items"><p class="muted">Add a frame item to begin this estimate.</p></div><div class="totalbox"><div class="muted">Combined estimate total</div><strong id="grand">R0.00</strong></div><div class="actions no-print"><button id="save">Save estimate on this device</button><button class="secondary" id="print">Print / Save as PDF</button><button class="secondary" id="new">New estimate</button></div></section>
+    <section class="card no-print"><h2>Saved estimates</h2><p class="hint">Estimates are stored locally in this browser on this device.</p><div id="saved"><p class="muted">No saved estimates yet.</p></div></section>
+    <footer>RooiWolf · Verify profile prices and rates against your current price list before issuing a quotation.</footer>
+  </main>
+  <script>
+    "use strict";
+    const profiles=[{code:"M14/32",description:"Mahogany 14f32d 6x6 lip",price:97.77462472,type:"standard"},{code:"A14/32",description:"Ash Prime 14f32d 6x6 lip",price:110.2491,type:"standard"},{code:"F14/32",description:"Floater frame 14f32d 6x6 lip",price:105,type:"floater"}];
+    const $=id=>document.getElementById(id), money=n=>"R"+Number(n||0).toLocaleString("en-ZA",{minimumFractionDigits:2,maximumFractionDigits:2}), esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    const KEY="rooiwolf_quotes"; let items=[];
+    function getQuotes(){try{return JSON.parse(localStorage.getItem(KEY)||localStorage.getItem("calcnest_quotes")||"[]")}catch{return []}}
+    function fillProfiles(){const type=$("kind").value, select=$("profile"), old=select.value;let list=profiles.filter(p=>p.type===type);select.innerHTML='<option value="">Choose a profile</option>'+list.map((p,i)=>`<option value="${i}">${esc(p.code)} — ${esc(p.description)} (${money(p.price)}/m)</option>`).join("")+'<option value="custom">Other / enter custom profile</option>';if(old!=="custom"&&list[Number(old)])select.value=old;else if(old==="custom")select.value="custom";toggleCustom();updatePreview()}
+    function toggleCustom(){const custom=$("profile").value==="custom";$("customCodeWrap").hidden=!custom;$("customPriceWrap").hidden=!custom}
+    function profileValue(){if($("profile").value==="custom"){const price=Number($("customPrice").value);return $("customCode").value.trim()&&price>=0?{code:$("customCode").value.trim(),description:"Custom profile",price,type:$("kind").value}:null}const p=profiles.filter(p=>p.type===$("kind").value)[Number($("profile").value)];return p||null}
+    function calc(){const p=profileValue(),qty=Number($("qty").value),l=Number($("length").value),w=Number($("width").value),size=Number($("size").value),mount=$("mount").value;if(!p||!(qty>0)||!(l>0)||!(w>0)||!(size>0)||($("kind").value==="standard"&&!mount))return null;const linear=qty*(l+w)*2.4,area=qty*l*w,parts={"Moulding wood":linear*p.price};if($("kind").value==="standard"){parts["3mm glass"]=area*485;parts["MDF backing"]=area*110;parts["Mounting / foam core"]=area*Number(mount);parts["Fittings, tape, nails, screws & ink"]=area*55}else{parts["Spray paint"]=linear*35;parts["Fittings, tape, nails, screws & ink"]=area*55}parts.Labour=qty*550*size;return{total:Object.values(parts).reduce((a,b)=>a+b,0),linear,area,parts,profile:p}}
+    function updatePreview(){const r=calc();$("previewtotal").textContent=r?money(r.total):"R0.00";$("previewnote").textContent=r?`Linear length ${r.linear.toFixed(3)} m · Area ${r.area.toFixed(4)} m²`:"Complete the required fields to calculate.";$("add").disabled=!r}
+    function currentItemValues(){const r=calc();return r?{qty:Number($("qty").value),length:Number($("length").value),width:Number($("width").value),type:$("kind").value,mount:$("mount").value,size:Number($("size").value),profile:r.profile,result:r}:null}
+    function renderItems(){ $("count").textContent=items.length?`${items.length} frame item${items.length===1?"":"s"} added.`:"No frame items added yet.";$("items").innerHTML=items.length?items.map((it,i)=>`<div class="item"><div class="itemhead"><div class="itemtitle">${i+1}. ${esc(it.type==="floater"?"Floater frame":"Standard frame")} — ${esc(it.profile.code)}</div><strong>${money(it.result.total)}</strong></div><div class="muted">${it.qty} × ${it.length} m × ${it.width} m · ${esc(it.profile.description)}</div><div class="actions no-print"><button class="danger" data-remove="${i}">Remove item</button></div></div>`).join(""):'<p class="muted">Add a frame item to begin this estimate.</p>';$("items").querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{items.splice(Number(b.dataset.remove),1);renderItems()});$("grand").textContent=money(items.reduce((sum,it)=>sum+it.result.total,0))}
+    function clearForm(){["length","width","customCode","customPrice"].forEach(id=>$(id).value="");$("qty").value="1";$("kind").value="standard";$("mount").value="";$("size").value="";fillProfiles()}
+    function renderSaved(){const arr=getQuotes();$("saved").innerHTML=arr.length?arr.slice().reverse().map(q=>`<div class="savedrow"><div><b>${esc(q.customer||"Customer")}</b><div class="muted">${esc(q.date||"")} · ${money(q.total)}</div></div><button class="secondary" data-delete="${q.id}">Delete</button></div>`).join(""):'<p class="muted">No saved estimates yet.</p>';$("saved").querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>{localStorage.setItem(KEY,JSON.stringify(getQuotes().filter(q=>String(q.id)!==b.dataset.delete)));renderSaved()})}
+    $("kind").addEventListener("change",()=>{$("mount").value="";fillProfiles();document.querySelectorAll(".standardonly").forEach(e=>e.hidden=$("kind").value!=="standard")});$("profile").addEventListener("change",()=>{toggleCustom();updatePreview()});["qty","length","width","mount","size","customCode","customPrice"].forEach(id=>$(id).addEventListener("input",updatePreview));
+    $("add").onclick=()=>{const it=currentItemValues();if(!it)return;items.push(it);renderItems();clearForm()};$("clear").onclick=clearForm;$("print").onclick=()=>window.print();$("save").onclick=()=>{if(!items.length){alert("Add at least one frame item first.");return}const arr=getQuotes();arr.push({id:Date.now(),date:new Date().toLocaleDateString("en-ZA"),customer:$("customer").value,contact:$("contact").value,items,total:items.reduce((s,it)=>s+it.result.total,0)});localStorage.setItem(KEY,JSON.stringify(arr));renderSaved();alert("Estimate saved on this device.")};$("new").onclick=()=>{if(items.length&&!confirm("Start a new estimate?"))return;items=[];$("customer").value="";$("contact").value="";renderItems()};
+    fillProfiles();document.querySelectorAll(".standardonly").forEach(e=>e.hidden=false);renderItems();renderSaved();
+    if("serviceWorker" in navigator&&location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+  </script>
+</body>
+</html>
